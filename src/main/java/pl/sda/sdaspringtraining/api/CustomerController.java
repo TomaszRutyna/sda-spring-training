@@ -1,16 +1,14 @@
 package pl.sda.sdaspringtraining.api;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
-import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
+import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.service.CustomerService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,7 +25,7 @@ public class CustomerController {
     }
 
     @PutMapping
-    void updateCustomer(@RequestBody UpdateCustomer updateCustomer) {
+    void updateCustomer(@RequestBody UpdateCar updateCustomer) {
         customerService.updateCustomer(updateCustomer);
     }
 
