@@ -22,4 +22,26 @@ public class HelloWorldController {
     String multiply(@RequestParam("f1") Integer factorOne, @RequestParam("f2") Integer factorTwo) {
         return "Wynik mnożenia to " + (factorOne * factorTwo);
     }
+
+    @GetMapping("/count/{operation}")
+    String count(@PathVariable String operation, @RequestParam("f1") Integer factorOne, @RequestParam("f2") Integer factorTwo) {
+        String result = "Wynik to ";
+        switch (operation) {
+            case "dodawanie":
+                result += factorOne + factorTwo;
+                break;
+            case "odejmowanie":
+                result += factorOne - factorTwo;
+                break;
+            case "mnozenie":
+                result += factorOne * factorTwo;
+                break;
+            case "dzielenie":
+                result += factorOne / factorTwo;
+                break;
+            default:
+                result = "Błąd";
+        }
+        return result;
+    }
 }
