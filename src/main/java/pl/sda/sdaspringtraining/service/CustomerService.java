@@ -6,6 +6,7 @@ import pl.sda.sdaspringtraining.api.model.NewCustomer;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 import pl.sda.sdaspringtraining.domain.CustomerEntity;
+import pl.sda.sdaspringtraining.service.mapper.CustomerMapper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,9 +20,14 @@ public class CustomerService {
     private static Integer customerId = 0;
     private static List<CustomerEntity> customers = new ArrayList<>();
 
+    private CustomerMapper customerMapper;
+
+    public CustomerService(CustomerMapper customerMapper) {
+        this.customerMapper = customerMapper;
+    }
+
     public void createCustomer(NewCustomer newCustomer) {
-        customers.add(new CustomerEntity(customerId++, newCustomer.getFirstName(), newCustomer.getLastName(),
-                newCustomer.getDriverLicense(), newCustomer.getAddress()));
+        customers.add(customerMapper.mapToEntity(customerId++, newCustomer));
     }
 
     public void updateCustomer(UpdateCustomer updateCustomer) {
@@ -35,13 +41,12 @@ public class CustomerService {
     public Optional<Customer> getById(Integer id) {
         return customers.stream().filter(cus -> cus.getId() == id)
                 .findFirst()
-                .map(ent -> new Customer(ent.getId(), ent.getFirstName(), ent.getLastName(),
-                        ent.getDriverLicense(), ent.getAddress()));
+                .map(ent -> customerMapper.mapToApi(ent));
     }
 
     public List<Customer> getAll() {
         return customers.stream()
-                .map(ent -> new Customer(ent.getId(), ent.getFirstName(), ent.getLastName(), ent.getDriverLicense(), ent.getAddress()))
+                .map(ent -> customerMapper.mapToApi(ent))
                 .collect(Collectors.toList());
     }
 
