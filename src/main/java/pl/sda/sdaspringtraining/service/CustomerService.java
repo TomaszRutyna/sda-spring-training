@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
+import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 import pl.sda.sdaspringtraining.domain.CustomerEntity;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class CustomerService {
                 newCustomer.getDriverLicense(), newCustomer.getAddress()));
     }
 
-    public void updateCustomer(UpdateCar updateCustomer) {
+    public void updateCustomer(UpdateCustomer updateCustomer) {
         for (CustomerEntity entity: customers) {
             if (entity.getId() == updateCustomer.getId()) {
                 entity.setAddress(updateCustomer.getNewAddress());

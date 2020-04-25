@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
+import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 import pl.sda.sdaspringtraining.service.CustomerService;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CustomerController {
     }
 
     @PutMapping
-    void updateCustomer(@RequestBody UpdateCar updateCustomer) {
+    void updateCustomer(@RequestBody UpdateCustomer updateCustomer) {
         customerService.updateCustomer(updateCustomer);
     }
 
