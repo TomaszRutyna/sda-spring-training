@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
+import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 
 @RestController
 @RequestMapping("/customers")
@@ -15,4 +16,8 @@ public class CustomerController {
         return newCustomer.toString();
     }
 
+    @PostMapping
+    String updateCustomer(@RequestBody UpdateCustomer updateCustomer) {
+        return updateCustomer.toString();
+    }
 }
