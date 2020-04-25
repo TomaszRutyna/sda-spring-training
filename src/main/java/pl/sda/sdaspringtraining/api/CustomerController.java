@@ -1,5 +1,7 @@
 package pl.sda.sdaspringtraining.api;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
@@ -13,8 +15,8 @@ import java.util.List;
 public class CustomerController {
 
     @PostMapping
-    String createCustomer(@RequestBody NewCustomer newCustomer) {
-        return newCustomer.toString();
+    ResponseEntity<String> createCustomer(@RequestBody NewCustomer newCustomer) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(newCustomer.toString());
     }
 
     @PutMapping
@@ -33,6 +35,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteCustomer(@PathVariable Integer id) {
 
     }
