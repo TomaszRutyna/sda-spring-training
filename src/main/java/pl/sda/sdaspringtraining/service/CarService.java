@@ -1,15 +1,14 @@
 package pl.sda.sdaspringtraining.service;
 
 import org.springframework.stereotype.Service;
+import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Car;
 import pl.sda.sdaspringtraining.api.model.NewCar;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.domain.CarEntity;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.rmi.NoSuchObjectException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,8 +27,10 @@ public class CarService {
             if (entity.getId() == updateCar.getId()) {
                 entity.setRegisterPlate(updateCar.getRegisterPlate());
                 entity.setOptions(updateCar.getOptions());
+                return;
             }
         }
+        throw new NotFoundException("Car with id " + updateCar.getId() + " not exist");
     }
 
     public Optional<Car> getById(Integer id) {
