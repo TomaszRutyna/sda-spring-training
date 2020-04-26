@@ -19,14 +19,14 @@ public class CarService {
 
     public void createCar(NewCar newCar) {
         cars.add(new CarEntity(carId++, newCar.getRegisterPlate(), newCar.getProducer(),
-                newCar.getModel(), newCar.getYearOfProduction(), newCar.getOptions()));
+                newCar.getModel(), newCar.getYearOfProduction(), String.join(",", newCar.getOptions())));
     }
 
     public void updateCar(UpdateCar updateCar) {
         for (CarEntity entity : cars) {
             if (entity.getId() == updateCar.getId()) {
                 entity.setRegisterPlate(updateCar.getRegisterPlate());
-                entity.setOptions(updateCar.getOptions());
+                entity.setOptions(String.join(",", updateCar.getOptions()));
                 return;
             }
         }
@@ -37,13 +37,13 @@ public class CarService {
         return cars.stream().filter(cus -> cus.getId() == id)
                 .findFirst()
                 .map(ent -> new Car(ent.getId(), ent.getRegisterPlate(), ent.getProducer(),
-                        ent.getModel(), ent.getYearOfProduction(), ent.getOptions()));
+                        ent.getModel(), ent.getYearOfProduction(), Arrays.asList(ent.getOptions().split(","))));
     }
 
     public List<Car> getAll() {
         return cars.stream()
                 .map(ent -> new Car(ent.getId(), ent.getRegisterPlate(), ent.getProducer(),
-                        ent.getModel(), ent.getYearOfProduction(), ent.getOptions()))
+                        ent.getModel(), ent.getYearOfProduction(), Arrays.asList(ent.getOptions().split(","))))
                 .collect(Collectors.toList());
     }
 
