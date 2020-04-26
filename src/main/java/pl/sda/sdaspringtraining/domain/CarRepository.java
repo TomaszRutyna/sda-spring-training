@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CarRepository extends JpaRepository<CarEntity, Integer> {
+public interface CarRepository extends JpaRepository<CarEntity, Integer>, CustomCarRepository {
 
     List<CarEntity> findAllByRegisterPlate(String registerPlate);
 
