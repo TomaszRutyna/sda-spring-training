@@ -1,6 +1,7 @@
 package pl.sda.sdaspringtraining.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Car;
 import pl.sda.sdaspringtraining.api.model.NewCar;
@@ -8,8 +9,9 @@ import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.domain.CarEntity;
 import pl.sda.sdaspringtraining.domain.CarRepository;
 
-import java.rmi.NoSuchObjectException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,14 +30,13 @@ public class CarService {
         carRepository.save(entity);
     }
 
+    @Transactional
     public void updateCar(UpdateCar updateCar) {
         CarEntity carToUpdate = carRepository.findById(updateCar.getId())
                 .orElseThrow(() -> new NotFoundException("Car with id " + updateCar.getId() + " not exist"));
 
         carToUpdate.setRegisterPlate(updateCar.getRegisterPlate());
         carToUpdate.setOptions(String.join(",", updateCar.getOptions()));
-
-        carRepository.save(carToUpdate);
     }
 
     public Optional<Car> getById(Integer id) {
