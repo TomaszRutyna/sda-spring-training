@@ -2,6 +2,7 @@ package pl.sda.sdaspringtraining.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.sda.sdaspringtraining.AlreadyExistsException;
 import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Car;
 import pl.sda.sdaspringtraining.api.model.NewCar;
@@ -24,6 +25,11 @@ public class CarService {
     }
 
     public void createCar(NewCar newCar) {
+        List<CarEntity> carsWithSamePlate = carRepository.findAllByRegisterPlate(newCar.getRegisterPlate());
+        if (!carsWithSamePlate.isEmpty()) {
+            throw new AlreadyExistsException("Car with plate " + newCar.getRegisterPlate() + " already exists");
+        }
+
         CarEntity entity = new CarEntity(null, newCar.getRegisterPlate(), newCar.getProducer(),
                 newCar.getModel(), newCar.getYearOfProduction(), String.join(",", newCar.getOptions()));
 
