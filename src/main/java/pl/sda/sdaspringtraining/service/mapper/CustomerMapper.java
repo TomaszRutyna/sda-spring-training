@@ -6,8 +6,8 @@ import pl.sda.sdaspringtraining.domain.CustomerEntity;
 
 public class CustomerMapper {
 
-    public CustomerEntity mapToEntity(Integer id, NewCustomer newCustomer) {
-        return new CustomerEntity(id, newCustomer.getFirstName(), newCustomer.getLastName(),
+    public CustomerEntity mapToEntity(NewCustomer newCustomer) {
+        return new CustomerEntity(null, newCustomer.getFirstName(), newCustomer.getLastName(),
                 newCustomer.getDriverLicense(), newCustomer.getAddress());
     }
 

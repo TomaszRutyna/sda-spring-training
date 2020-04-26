@@ -1,11 +1,13 @@
 package pl.sda.sdaspringtraining.service;
 
 import org.springframework.stereotype.Service;
+import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 import pl.sda.sdaspringtraining.domain.CustomerEntity;
+import pl.sda.sdaspringtraining.domain.CustomerRepository;
 import pl.sda.sdaspringtraining.service.mapper.CustomerMapper;
 
 import java.util.ArrayList;
@@ -17,47 +19,38 @@ import java.util.stream.Collectors;
 @Service
 public class CustomerService {
 
-    private static Integer customerId = 0;
-    private static List<CustomerEntity> customers = new ArrayList<>();
-
+    private CustomerRepository customerRepository;
     private CustomerMapper customerMapper;
 
-    public CustomerService(CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+        this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
     }
 
     public void createCustomer(NewCustomer newCustomer) {
-        customers.add(customerMapper.mapToEntity(customerId++, newCustomer));
+        customerRepository.save(customerMapper.mapToEntity(newCustomer));
     }
 
     public void updateCustomer(UpdateCustomer updateCustomer) {
-        for (CustomerEntity entity: customers) {
-            if (entity.getId() == updateCustomer.getId()) {
-                entity.setAddress(updateCustomer.getNewAddress());
-            }
-        }
+        CustomerEntity customerToUpdate = customerRepository.findById(updateCustomer.getId())
+                .orElseThrow(() -> new NotFoundException("Customer with id " + updateCustomer.getId() + " not exist"));
+        customerToUpdate.setAddress(updateCustomer.getNewAddress());
+
+        customerRepository.save(customerToUpdate);
     }
 
     public Optional<Customer> getById(Integer id) {
-        return customers.stream().filter(cus -> cus.getId() == id)
-                .findFirst()
+        return customerRepository.findById(id)
                 .map(ent -> customerMapper.mapToApi(ent));
     }
 
     public List<Customer> getAll() {
-        return customers.stream()
+        return customerRepository.findAll().stream()
                 .map(ent -> customerMapper.mapToApi(ent))
                 .collect(Collectors.toList());
     }
 
     public void deleteById(Integer id) {
-        Iterator<CustomerEntity> customerIterator = customers.iterator();
-        while (customerIterator.hasNext()) {
-            CustomerEntity next = customerIterator.next();
-            if (next.getId() == id) {
-                customerIterator.remove();
-                return;
-            }
-        }
+        customerRepository.deleteById(id);
     }
 }
