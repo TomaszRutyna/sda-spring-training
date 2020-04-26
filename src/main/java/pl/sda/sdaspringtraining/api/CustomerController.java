@@ -11,6 +11,7 @@ import pl.sda.sdaspringtraining.api.model.UpdateCustomer;
 import pl.sda.sdaspringtraining.service.CustomerService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
@@ -36,8 +37,10 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    Customer getById(@PathVariable Integer id) {
-        return customerService.getById(id).get();
+    ResponseEntity<Customer> getById(@PathVariable Integer id) {
+        Optional<Customer> customer = customerService.getById(id);
+        return customer.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
