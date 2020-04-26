@@ -38,4 +38,13 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
 
     List<CarEntity> findByRents_RentFromIsAfter(LocalDate rentedAfterDate);
 
+    //Praca wlasna:
+    List<CarEntity> findAllByYearOfProductionIsLessThan(Integer olderThan);
+
+    @Query("SELECT DISTINCT(car.producer) FROM CarEntity car")
+    List<String> findAllDistinctProducers();
+
+    @Query("SELECT car from CarEntity car where car.rents.size = 0")
+    List<CarEntity> findAllByWithoutRents();
+
 }
