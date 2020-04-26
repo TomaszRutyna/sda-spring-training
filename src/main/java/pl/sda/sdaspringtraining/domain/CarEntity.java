@@ -3,6 +3,7 @@ package pl.sda.sdaspringtraining.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @ToString
 @Getter
@@ -19,5 +20,8 @@ public class CarEntity {
     private String producer;
     private String model;
     private int yearOfProduction;
-    private String options;
+
+    @OneToMany(mappedBy = "car")
+    private Set<RentEntity> rents;
+
 }

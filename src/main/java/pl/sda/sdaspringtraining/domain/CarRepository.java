@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,7 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer> {
     //Zapytanie ktorego nie dalo sie wykonac za pomoca query method
     @Query("SELECT car FROM CarEntity car WHERE car.yearOfProduction = (SELECT MAX(c.yearOfProduction) FROM CarEntity c)")
     List<CarEntity> getOnlyNewest();
+
+    List<CarEntity> findByRents_RentFromIsAfter(LocalDate rentedAfterDate);
 
 }
