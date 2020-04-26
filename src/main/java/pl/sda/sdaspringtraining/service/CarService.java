@@ -31,7 +31,7 @@ public class CarService {
         }
 
         CarEntity entity = new CarEntity(null, newCar.getRegisterPlate(), newCar.getProducer(),
-                newCar.getModel(), newCar.getYearOfProduction(), String.join(",", newCar.getOptions()));
+                newCar.getModel(), newCar.getYearOfProduction(), String.join(",", newCar.getOptions()), null);
 
         carRepository.save(entity);
     }

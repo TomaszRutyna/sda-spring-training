@@ -20,7 +20,7 @@ public class CarEntity {
     private String producer;
     private String model;
     private int yearOfProduction;
-
+    private String options;
     @OneToMany(mappedBy = "car")
     private Set<RentEntity> rents;
 
