@@ -13,20 +13,16 @@ public class DriverLicenseValidator implements ConstraintValidator<ValidDriverLi
     @Override
     public boolean isValid(String number, ConstraintValidatorContext constraintValidatorContext) {
         if (number == null || number.isEmpty()) {
-            constraintValidatorContext.buildConstraintViolationWithTemplate("Driver license number cannot be empty");
             return false;
         }
         if (number.length() != 10) {
-            constraintValidatorContext.buildConstraintViolationWithTemplate("Driver license number length must equal 10");
             return false;
         }
         if (!is3FirstChars(number)) {
-            constraintValidatorContext.buildConstraintViolationWithTemplate("Driver license number starts with 3 letters");
             return false;
         }
 
         if (!validChecksum(number)) {
-            constraintValidatorContext.buildConstraintViolationWithTemplate("Driver license number must have right checksum");
             return false;
         }
 

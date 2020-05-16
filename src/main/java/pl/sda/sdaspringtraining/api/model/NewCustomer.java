@@ -2,6 +2,7 @@ package pl.sda.sdaspringtraining.api.model;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import pl.sda.sdaspringtraining.api.validator.ValidDriverLicense;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -18,6 +19,6 @@ public class NewCustomer {
     private String lastName;
     @Length(max = 30, message = "Address is too long")
     private String address;
-    @Pattern(regexp = "[0-9]*")
+    @ValidDriverLicense
     private String driverLicense;
 }
