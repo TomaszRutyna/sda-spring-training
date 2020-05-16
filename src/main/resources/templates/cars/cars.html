@@ -25,6 +25,7 @@
         <td>Numer rej.</td>
         <td>Marka</td>
         <td>Model</td>
+        <td>Kraj pochodzenia</td>
         <td>Rok prod.</td>
     </tr>
     </thead>
@@ -35,6 +36,14 @@
             <td><span th:text="${car.registerPlate}"></span></td>
             <td><span th:text="${car.producer}"></span></td>
             <td><span th:text="${car.model}"></span></td>
+            <td>
+                <div th:switch="${car.producer}">
+                    <span th:case="VW">Niemcy</span>
+                    <span th:case="Renault">Francja</span>
+                    <span th:case="Seat">Hiszpania</span>
+                    <span th:case="*">Brak informacji</span>
+                </div>
+            </td>
             <td><span th:text="${car.yearOfProduction}"></span></td>
         </tr>
     </div>
