@@ -28,6 +28,7 @@
         <td>Kraj pochodzenia</td>
         <td>Rok prod.</td>
         <td></td>
+        <td></td>
     </tr>
     </thead>
     <tbody>
@@ -49,6 +50,9 @@
             <td>
                 <span th:if="${car.yearOfProduction < 1990}">Oldtimer</span>
                 <span th:if="${car.yearOfProduction > 2015}">Nowosc</span>
+            </td>
+            <td>
+                <a th:href="@{/cars/} + ${car.id}">Szczegoly</a>
             </td>
         </tr>
     </div>
