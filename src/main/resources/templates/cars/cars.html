@@ -27,6 +27,7 @@
         <td>Model</td>
         <td>Kraj pochodzenia</td>
         <td>Rok prod.</td>
+        <td></td>
     </tr>
     </thead>
     <tbody>
@@ -45,6 +46,10 @@
                 </div>
             </td>
             <td><span th:text="${car.yearOfProduction}"></span></td>
+            <td>
+                <span th:if="${car.yearOfProduction < 1990}">Oldtimer</span>
+                <span th:if="${car.yearOfProduction > 2015}">Nowosc</span>
+            </td>
         </tr>
     </div>
     <div th:unless="${ not #lists.isEmpty(cars) }">
