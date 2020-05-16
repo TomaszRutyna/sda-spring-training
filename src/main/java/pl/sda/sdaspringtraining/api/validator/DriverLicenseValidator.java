@@ -26,7 +26,7 @@ public class DriverLicenseValidator implements ConstraintValidator<ValidDriverLi
             return false;
         }
 
-        return false;
+        return true;
     }
 
     private boolean validChecksum(String number) {
