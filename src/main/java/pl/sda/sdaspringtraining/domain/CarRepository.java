@@ -59,8 +59,8 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer>, Custom
 
     List<CarEntity> findAllByOptionsContains(String element);
 
-    @Query("SELECT new Car(car.id, car.registerPlate, car.producer, car.model, car.yearOfProduction) FROM CarEntity car" )
-    List<Car> findAllCars();
+/*    @Query("SELECT new Car(car.id, car.registerPlate, car.producer, car.model, car.yearOfProduction) FROM CarEntity car" )
+    List<Car> findAllCars();*/
 
     @Query("SELECT car FROM CarEntity car " +
             " inner join car.rents rent WHERE rent.rentFrom > :forDate AND rent.rentTo < :forDate")

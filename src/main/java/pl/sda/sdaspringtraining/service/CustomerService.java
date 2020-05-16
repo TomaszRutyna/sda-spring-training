@@ -1,5 +1,8 @@
 package pl.sda.sdaspringtraining.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Customer;
