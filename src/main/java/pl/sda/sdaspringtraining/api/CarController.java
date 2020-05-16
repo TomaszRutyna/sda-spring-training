@@ -8,6 +8,8 @@ import pl.sda.sdaspringtraining.api.model.*;
 import pl.sda.sdaspringtraining.service.CarService;
 import pl.sda.sdaspringtraining.service.CustomerService;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,8 +19,13 @@ public class CarController {
 
     private final CarService carService;
 
+    @PostMapping("/search")
+    List<Car> findByCriteria(@Valid @RequestBody CarSearchCriteria searchCriteria) {
+        return new ArrayList<>();
+    }
+
     @PostMapping
-    ResponseEntity<Void> car(@RequestBody NewCar newCar) {
+    ResponseEntity<Void> car(@Valid @RequestBody NewCar newCar) {
         carService.createCar(newCar);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
