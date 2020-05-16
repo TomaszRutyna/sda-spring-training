@@ -2,7 +2,9 @@ package pl.sda.sdaspringtraining.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.sda.sdaspringtraining.api.model.Car;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,5 +48,28 @@ public interface CarRepository extends JpaRepository<CarEntity, Integer>, Custom
 
     @Query("SELECT car from CarEntity car where car.rents.size = 0")
     List<CarEntity> findAllByWithoutRents();
+
+    List<CarEntity> findAllByProducerLike(String producer);
+
+    @Query("SELECT car from CarEntity car where car.rents.size = (SELECT max(c.rents.size) FROM CarEntity c)")
+    List<CarEntity> findMostPopular();
+
+    @Query("SELECT car from CarEntity car WHERE length(car.options) = (SELECT max(length(c.options)) FROM CarEntity c)")
+    List<CarEntity> findWithLongestOptionsList();
+
+    List<CarEntity> findAllByOptionsContains(String element);
+
+    @Query("SELECT new Car(car.id, car.registerPlate, car.producer, car.model, car.yearOfProduction) FROM CarEntity car" )
+    List<Car> findAllCars();
+
+    @Query("SELECT car FROM CarEntity car " +
+            " inner join car.rents rent WHERE rent.rentFrom > :forDate AND rent.rentTo < :forDate")
+    List<CarEntity> findAllRentedForDay(@Param("forDate") LocalDate date);
+
+    @Query("SELECT distinct(car) FROM CarEntity car " +
+            "INNER JOIN car.rents rent " +
+            "INNER JOIN rent.customer cust " +
+            "WHERE cust.address like '%:city%'")
+    List<CarEntity> findAllRentedByCustomerFrom(@Param("city") String city);
 
 }
