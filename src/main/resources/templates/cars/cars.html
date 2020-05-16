@@ -7,9 +7,11 @@
         .header {
             background-color: darkolivegreen;
         }
+
         .even {
             background-color: darkgreen;
         }
+
         .odd {
             background-color: green;
         }
@@ -17,23 +19,31 @@
     </style>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr class="header">
-                <td>Numer rej.</td>
-                <td>Marka</td>
-                <td>Model</td>
-                <td>Rok prod.</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="car, iterStat : ${cars}" th:class="${iterStat.odd} ? 'odd' : 'even'">
-                <td><span th:text="${car.registerPlate}"></span></td>
-                <td><span th:text="${car.producer}"></span></td>
-                <td><span th:text="${car.model}"></span></td>
-                <td><span th:text="${car.yearOfProduction}"></span></td>
-            </tr>
-        </tbody>
-    </table>
+<table>
+    <thead>
+    <tr class="header">
+        <td>Numer rej.</td>
+        <td>Marka</td>
+        <td>Model</td>
+        <td>Rok prod.</td>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- <div th:if="${ cars.size() > 0 }"> -->
+    <div th:if="${ not #lists.isEmpty(cars) }">
+        <tr th:each="car, iterStat : ${cars}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+            <td><span th:text="${car.registerPlate}"></span></td>
+            <td><span th:text="${car.producer}"></span></td>
+            <td><span th:text="${car.model}"></span></td>
+            <td><span th:text="${car.yearOfProduction}"></span></td>
+        </tr>
+    </div>
+    <div th:unless="${ not #lists.isEmpty(cars) }">
+        <tr>
+            <td colspan="4">Brak samochodów w wypożyczalni</td>
+        </tr>
+    </div>
+    </tbody>
+</table>
 </body>
 </html>
