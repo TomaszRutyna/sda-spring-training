@@ -1,6 +1,8 @@
-package pl.sda.sdaspringtraining.domain;
+package pl.sda.sdaspringtraining.domain.rent;
 
 import lombok.*;
+import pl.sda.sdaspringtraining.domain.car.CarEntity;
+import pl.sda.sdaspringtraining.domain.customer.CustomerEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;

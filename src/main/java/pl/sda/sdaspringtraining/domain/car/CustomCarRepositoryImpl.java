@@ -1,4 +1,4 @@
-package pl.sda.sdaspringtraining.domain;
+package pl.sda.sdaspringtraining.domain.car;
 
 import org.springframework.stereotype.Repository;
 import pl.sda.sdaspringtraining.api.model.CarSearchCriteria;

@@ -7,8 +7,8 @@ import pl.sda.sdaspringtraining.NotFoundException;
 import pl.sda.sdaspringtraining.api.model.Car;
 import pl.sda.sdaspringtraining.api.model.NewCar;
 import pl.sda.sdaspringtraining.api.model.UpdateCar;
-import pl.sda.sdaspringtraining.domain.CarEntity;
-import pl.sda.sdaspringtraining.domain.CarRepository;
+import pl.sda.sdaspringtraining.domain.car.CarEntity;
+import pl.sda.sdaspringtraining.domain.car.CarRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class CarService {
 
-    private CarRepository carRepository;
+    private final CarRepository carRepository;
 
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;

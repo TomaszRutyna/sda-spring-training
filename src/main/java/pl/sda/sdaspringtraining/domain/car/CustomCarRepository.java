@@ -1,6 +1,5 @@
-package pl.sda.sdaspringtraining.domain;
+package pl.sda.sdaspringtraining.domain.car;
 
-import org.springframework.data.repository.NoRepositoryBean;
 import pl.sda.sdaspringtraining.api.model.CarSearchCriteria;
 
 import java.util.List;

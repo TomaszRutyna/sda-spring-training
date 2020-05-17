@@ -1,4 +1,4 @@
-package pl.sda.sdaspringtraining.domain;
+package pl.sda.sdaspringtraining.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,7 +2,7 @@ package pl.sda.sdaspringtraining.service.mapper;
 
 import pl.sda.sdaspringtraining.api.model.Customer;
 import pl.sda.sdaspringtraining.api.model.NewCustomer;
-import pl.sda.sdaspringtraining.domain.CustomerEntity;
+import pl.sda.sdaspringtraining.domain.customer.CustomerEntity;
 
 public class CustomerMapper {
 

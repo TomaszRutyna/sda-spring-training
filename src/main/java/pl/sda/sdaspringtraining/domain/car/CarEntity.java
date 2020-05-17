@@ -1,6 +1,7 @@
-package pl.sda.sdaspringtraining.domain;
+package pl.sda.sdaspringtraining.domain.car;
 
 import lombok.*;
+import pl.sda.sdaspringtraining.domain.rent.RentEntity;
 
 import javax.persistence.*;
 import java.util.Set;
