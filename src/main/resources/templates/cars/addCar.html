@@ -11,6 +11,11 @@
     Marka: <input type="text" th:field="*{producer}"/><br>
     Model: <input type="text" th:field="*{model}"/><br>
     Rok produkcji: <input type="text" th:field="*{yearOfProduction}"/><br>
+    Wyposazenie: <select th:field="*{options}" multiple>
+                <option value="klimatyzacja">Klimatyzacja</option>
+                <option value="radio MP3">Radio MP3</option>
+                <option value="nawigacja">Nawigacja</option>
+            </select><br>
     <input type="submit" value="Dodaj"/>
 </form>
 </body>
