@@ -1,6 +1,7 @@
 package pl.sda.sdaspringtraining.api.mvc;
 
 import jdk.internal.dynalink.MonomorphicCallSite;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class MvcCarController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     ModelAndView addNewCarPage() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("cars/addCar.html");
@@ -34,6 +36,7 @@ public class MvcCarController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     String addNewCar(@Valid @ModelAttribute("car") NewCar newCar, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
@@ -45,6 +48,7 @@ public class MvcCarController {
     }
 
     @GetMapping("/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     ModelAndView updateNewCarPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("cars/updateCar.html");
@@ -58,6 +62,7 @@ public class MvcCarController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     String updateCar(@Valid @ModelAttribute("car") UpdateCar updateCar, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "error.html";
@@ -68,6 +73,7 @@ public class MvcCarController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     ModelAndView showAllCars() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("cars/cars.html");
@@ -76,6 +82,7 @@ public class MvcCarController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     ModelAndView showCarDetails(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("cars/carDetails.html");
