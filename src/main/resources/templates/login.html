@@ -1,0 +1,16 @@
+<html lang="pl" xmlns:th="thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+</head>
+<body>
+    Zaloguj sie do wypozyczalni
+
+    <form th:action="@{/authenticate}" method="post">
+        Login: <input type="text" id="username" name="username"/><br>
+        Haslo: <input type="password" id="password" name="password"/><br>
+        <input type="submit" value="Zaloguj sie"/>
+    </form>
+</body>
+</html>

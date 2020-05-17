@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class MvcMainPageController {
 
     @GetMapping("/")
-    ModelAndView mainPage(@RequestParam String branch) {
+    ModelAndView mainPage(@RequestParam(required = false) String branch) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("main.html");
 
