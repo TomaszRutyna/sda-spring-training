@@ -3,6 +3,7 @@ package pl.sda.sdaspringtraining.api.model;
 import lombok.*;
 import pl.sda.sdaspringtraining.api.validator.CurrentYearOrOlder;
 
+import java.util.Collections;
 import java.util.List;
 
 @ToString
@@ -16,6 +17,6 @@ public class NewCar {
     private String model;
     @CurrentYearOrOlder
     private int yearOfProduction;
-    private List<String> options;
+    private List<String> options = Collections.emptyList();
 
 }

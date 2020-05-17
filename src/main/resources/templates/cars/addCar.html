@@ -1,0 +1,17 @@
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+
+</head>
+<body>
+
+<form th:action="@{/cars/add}" method="post" th:object="${car}">
+    Nr rej: <input type="text" th:field="*{registerPlate}"/><br>
+    Marka: <input type="text" th:field="*{producer}"/><br>
+    Model: <input type="text" th:field="*{model}"/><br>
+    Rok produkcji: <input type="text" th:field="*{yearOfProduction}"/><br>
+    <input type="submit" value="Dodaj"/>
+</form>
+</body>
+</html>
