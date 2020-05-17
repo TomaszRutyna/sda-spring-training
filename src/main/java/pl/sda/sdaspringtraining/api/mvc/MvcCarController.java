@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.sda.sdaspringtraining.api.model.Car;
 import pl.sda.sdaspringtraining.api.model.NewCar;
+import pl.sda.sdaspringtraining.api.model.UpdateCar;
 import pl.sda.sdaspringtraining.service.CarService;
 
 import javax.validation.Valid;
@@ -39,6 +41,29 @@ public class MvcCarController {
         }
 
         carService.createCar(newCar);
+        return "redirect:/cars";
+    }
+
+    @GetMapping("/update/{id}")
+    ModelAndView updateNewCarPage(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("cars/updateCar.html");
+        //WAZNE
+
+        Car car = carService.getById(id).get();
+        UpdateCar updateCar = new UpdateCar(car.getId(), car.getRegisterPlate(), car.getOptions());
+        mav.addObject("car", updateCar);
+
+        return mav;
+    }
+
+    @PostMapping("/update")
+    String updateCar(@Valid @ModelAttribute("car") UpdateCar updateCar, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "error.html";
+        }
+
+        carService.updateCar(updateCar);
         return "redirect:/cars";
     }
 

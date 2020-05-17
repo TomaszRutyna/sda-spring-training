@@ -1,0 +1,20 @@
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypozyczalnia</title>
+
+</head>
+<body>
+
+<form th:action="@{/cars/update}" method="post" th:object="${car}">
+    <input type="hidden" th:field="*{id}"/>
+    Nr rej: <input type="text" th:field="*{registerPlate}"/><br>
+    Wyposazenie: <select th:field="*{options}" multiple>
+                <option value="klimatyzacja">Klimatyzacja</option>
+                <option value="radio MP3">Radio MP3</option>
+                <option value="nawigacja">Nawigacja</option>
+            </select><br>
+    <input type="submit" value="Dodaj"/>
+</form>
+</body>
+</html>
